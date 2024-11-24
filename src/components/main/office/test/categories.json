@@ -1,0 +1,45 @@
+[
+	{
+		"category": "财务管理",
+		"items": [
+			{ "name": "报销申请", "link": "" },
+			{ "name": "付款申请", "link": "" }
+		]
+	},
+	{
+		"category": "采购",
+		"items": [{ "name": "采购管理", "link": "" }]
+	},
+	{
+		"category": "内置流程",
+		"items": [{ "name": "信息发布", "link": "" }]
+	},
+	{
+		"category": "人力资源",
+		"items": [
+			{ "name": "加班申请", "link": "" },
+			{ "name": "员工管理", "link": "" },
+			{ "name": "培训申请", "link": "" },
+			{ "name": "请假管理", "link": "" },
+			{ "name": "出差申请", "link": "" }
+		]
+	},
+	{
+		"category": "行政管理",
+		"items": [
+			{ "name": "办公用品管理", "link": "" },
+			{ "name": "用印申请", "link": "" },
+			{ "name": "会议管理", "link": "" }
+		]
+	},
+	{
+		"category": "未分类",
+		"items": [
+			{ "name": "固定资产管理", "link": "" },
+			{ "name": "在线协作", "link": "" },
+			{ "name": "文件传阅", "link": "" },
+			{ "name": "样例", "link": "" },
+			{ "name": "通知公告", "link": "" }
+		]
+	}
+]

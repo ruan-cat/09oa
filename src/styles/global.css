@@ -1,0 +1,11 @@
+html,
+body,
+#app {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+/* 移除浏览器提供的聚焦边框 */
+*:focus-visible {
+	outline: none;
+}

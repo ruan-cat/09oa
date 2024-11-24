@@ -1,0 +1,32 @@
+.icon-background {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.3;
+}
+
+.card-container .el-card__header {
+	border-bottom: none;
+	/* 移除 el-card header 的边框 */
+}
+
+.card-container .content-container {
+	height: 400px;
+}
+
+.content-container .content {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.el-card__body {
+	padding: 0% 20px;
+}
+
+.el-card__header {
+	padding: 5px 20px;
+}
