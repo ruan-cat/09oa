@@ -5,6 +5,9 @@ import type { UseAxiosOptions, UseAxiosReturn } from "@vueuse/integrations/useAx
 /** 拓展的类型参数 用于约束必填的字段 */
 export type KeyAxiosRequestConfig<D = any> = keyof AxiosRequestConfig<D>;
 
+/** 填写key值的帮助类型 */
+export type KeyHelper<K extends KeyAxiosRequestConfig> = K;
+
 /**
  * 创建 AxiosRequestConfig 的各种变种类型
  * @description
@@ -112,12 +115,12 @@ export interface UseAxiosWrapperParams<
  *
  * 预期设计成一个万能的 通用的请求函数
  */
-export function useAxiosWrapper<T, K extends KeyAxiosRequestConfig>(params: UseAxiosWrapperParams) {
+export function useAxiosWrapper<T, K extends KeyAxiosRequestConfig, D = any>(params: UseAxiosWrapperParams) {
 	const {
 		config: { url },
 		config,
 		instance,
 		options,
 	} = params;
-	return useAxios<T, K>(url, config, instance, options);
+	return useAxios<T, K, AxiosResponse<T>, D>(url, config, instance, options);
 }

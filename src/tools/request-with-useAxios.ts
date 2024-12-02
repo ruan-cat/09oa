@@ -14,6 +14,7 @@
  * TODO: 正在拆分 准备拆分出一个跨项目的 最纯粹的请求工具 对 useAxios 做尽可能简单的二次封装。
  */
 
+import type { PartialPick } from "type-plus";
 import axios from "axios";
 import type { AxiosRequestConfig, Method, AxiosInstance, AxiosResponse } from "axios";
 import { AxiosError } from "axios";
@@ -28,9 +29,8 @@ import { userStore } from "stores/user";
 import type { Router } from "vue-router";
 
 import type { JsonVO } from "types/JsonVO";
-import type { KeyAxiosRequestConfig, CreateAxiosRequestConfig, UseAxiosWrapperParams } from "utils/useAxios";
+import type { KeyAxiosRequestConfig, CreateAxiosRequestConfig, UseAxiosWrapperParams, KeyHelper } from "utils/useAxios";
 import { useAxiosWrapper } from "utils/useAxios";
-import { extendComponentModel } from "echarts/core";
 
 /**
  * 数据上传数据类型
@@ -244,19 +244,6 @@ export interface RequestForUseAxiosParameter<
 	options?: UseAxiosOptionsJsonVO<T>;
 }
 
-export interface UseAxiosOAParams extends UseAxiosWrapperParams {}
-
-function useAxiosOA<T = any, K extends KeyAxiosRequestConfig = "url">(
-	params: UseAxiosWrapperParams<T, "url", UseAxiosOptionsJsonVO<T>>,
-) {
-	const { config, options } = params;
-	return useAxiosWrapper<JsonVO<T>, RemoveUrl<K>>({
-		config,
-		instance: axiosInstance,
-		options,
-	});
-}
-
 /** 生成默认的选项配置 */
 function createDefaultUseAxiosOptions<T = any>(): UseAxiosOptionsImmediate<T> {
 	return {
@@ -274,6 +261,30 @@ function createDefaultUseAxiosOptions<T = any>(): UseAxiosOptionsImmediate<T> {
 function setDefaultUseAxiosOptions(options: UseAxiosOptions) {
 	const _options = createDefaultUseAxiosOptions();
 	options.immediate = options?.immediate ?? _options.immediate;
+}
+
+/**
+ * 对 UseAxiosWrapperParams 做一层业务性质的封装
+ * - 预设必填url参数
+ * - 不必填instance实例
+ * - 不必填选项配置
+ */
+export interface UseAxiosOAParams<T = any, K extends KeyAxiosRequestConfig<D> = "url", D = any>
+	extends PartialPick<UseAxiosWrapperParams<T, K, UseAxiosOptions<JsonVO<T>>, D>, "instance" | "options"> {}
+
+/**
+ * 在本OA项目中，预期作为万能的请求函数
+ */
+function useAxiosOA<T = any, K extends KeyAxiosRequestConfig = "url", D = any>(params: UseAxiosOAParams<T, "url", D>) {
+	const { config, options = createDefaultUseAxiosOptions(), instance = axiosInstance } = params;
+
+	setDefaultUseAxiosOptions(options);
+
+	return useAxiosWrapper<JsonVO<T>, RemoveUrl<K>, D>({
+		config,
+		instance,
+		options,
+	});
 }
 
 /**
