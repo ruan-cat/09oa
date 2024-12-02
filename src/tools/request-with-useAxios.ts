@@ -20,13 +20,12 @@ import { AxiosError } from "axios";
 
 import qs from "qs";
 import type { RequiredPick } from "type-plus";
-import { isNull, merge, isUndefined, isNil } from "lodash-es";
+import { merge, isNil } from "lodash-es";
 
 import type { UseAxiosOptions, UseAxiosReturn } from "@vueuse/integrations/useAxios";
 import { ElMessage } from "element-plus";
 
 import { userStore } from "stores/user";
-import router from "@/router/index";
 import { type Router } from "vue-router";
 
 import { type JsonVO } from "types/JsonVO";

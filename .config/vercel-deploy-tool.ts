@@ -25,7 +25,7 @@ export default <Config>{
 		{
 			type: "userCommands",
 			targetCWD: "./",
-			outputDirectory: "dist/**/*",
+			outputDirectory: "dist",
 			url: ["01s-09oa.ruancat6312.top"],
 			userCommands: ["pnpm -C=./ build"],
 		},

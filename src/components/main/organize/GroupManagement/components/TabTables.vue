@@ -247,7 +247,7 @@ import {
 } from "@/apis/organize/group";
 import { getQueryOrgunitMembersApi, getIdentityApi, getIdSelectOrgNameTreeApi, getIdGrouplistApi } from "@/apis/public";
 import { ElMessage, ElMessageBox } from "element-plus";
-import { throttle } from "lodash";
+import { throttle } from "lodash-es";
 // import PeopleTree from "@/components/main/public/PeopleTree.vue";
 import PeopleTree from "./PeopleTree.vue";
 import PublicPeopleTree from "@/components/main/public/PeopleTree.vue";

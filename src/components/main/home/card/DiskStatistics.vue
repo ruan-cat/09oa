@@ -37,7 +37,6 @@ import { ref, onMounted } from "vue";
 import { fetchDiskFileInfo } from "@/apis/index/index1";
 import { ElMessage } from "element-plus";
 import { Document, Download } from "@element-plus/icons-vue";
-// import { SaveOne } from "@icon-park/vue";
 const diskFiles = ref([]);
 const defaultActive = ref("0");
 const loadDiskFiles = async () => {
