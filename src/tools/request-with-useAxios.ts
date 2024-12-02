@@ -11,7 +11,7 @@
  * - 常见请求类型的请求函数
  * - 常见请求返回值的处理函数
  *
- * TODO: 正在拆分 准备拆分出一个跨项目的 最纯粹的请求工具 对 useAxios 做经可能简单的二次封装。
+ * TODO: 正在拆分 准备拆分出一个跨项目的 最纯粹的请求工具 对 useAxios 做尽可能简单的二次封装。
  */
 
 import axios from "axios";
@@ -19,16 +19,16 @@ import type { AxiosRequestConfig, Method, AxiosInstance, AxiosResponse } from "a
 import { AxiosError } from "axios";
 
 import qs from "qs";
-import type { RequiredPick } from "type-plus";
 import { merge, isNil } from "lodash-es";
+import type { UseAxiosOptions } from "@vueuse/integrations/useAxios";
 
-import type { UseAxiosOptions, UseAxiosReturn } from "@vueuse/integrations/useAxios";
 import { ElMessage } from "element-plus";
 
 import { userStore } from "stores/user";
-import { type Router } from "vue-router";
+import type { Router } from "vue-router";
 
-import { type JsonVO } from "types/JsonVO";
+import type { JsonVO } from "types/JsonVO";
+import type { KeyAxiosRequestConfig, StrictUseAxiosReturn, CreateAxiosRequestConfig } from "utils/useAxios";
 
 /**
  * 数据上传数据类型
@@ -160,50 +160,12 @@ export function isAxiosInstance(p: any): p is AxiosInstance {
 	return !!p?.request;
 }
 
-/**
- * 创建 AxiosRequestConfig 的各种变种类型
- * @description
- * 目前需要给 AxiosRequestConfig 添加必填属性
- *
- * 故需要本工具创建各种变种类型
- *
- * @example CreateAxiosRequestConfig<"url", D>
- */
-type CreateAxiosRequestConfig<K extends keyof Target, D = any, Target = AxiosRequestConfig<D>> = RequiredPick<
-	Target,
-	K
->;
-
-/** 拓展的类型参数 用于约束必填的字段 */
-type KeyAxiosRequestConfig<D = any> = keyof AxiosRequestConfig<D>;
-
 type UrlParams = Extract<KeyAxiosRequestConfig, "url" | "params">;
 type UrlData = Extract<KeyAxiosRequestConfig, "url" | "data">;
 
 type UrlMethodData = Extract<KeyAxiosRequestConfig, "url" | "method" | "data">;
 
 type RemoveUrl<T extends KeyAxiosRequestConfig> = Exclude<T, "url">;
-
-/** 拓展K泛型后的类型 */
-export interface StrictUseAxiosReturn<
-	T,
-	/**
-	 * 拓展的类型参数 用于约束必填的字段
-	 * @description
-	 * 这里不需要提供默认的取值
-	 */
-	K extends KeyAxiosRequestConfig<D>,
-	R,
-	D,
-> extends UseAxiosReturn<T, R, D> {
-	/**
-	 * Manually call the axios request
-	 */
-	execute: (
-		url?: string | CreateAxiosRequestConfig<K, D>,
-		config?: CreateAxiosRequestConfig<K, D>,
-	) => Promise<StrictUseAxiosReturn<T, K, R, D>>;
-}
 
 // 有疑惑 期望实现类型约束 但是这里无法有效约束
 // declare module "@vueuse/integrations/useAxios" {
@@ -214,24 +176,6 @@ export interface StrictUseAxiosReturn<
 // 		onError?: (e: T) => void;
 // 	}
 // }
-
-/**
- * 拓展类型参数后的 useAxios 函数
- * @description
- * 在我们的封装中 使用本类型
- */
-export declare function useAxios<
-	T = any,
-	/** 拓展的类型参数 用于约束必填的字段 */
-	K extends KeyAxiosRequestConfig<D> = "url",
-	R = AxiosResponse<T>,
-	D = any,
->(
-	url: string,
-	config: AxiosRequestConfig<D>,
-	instance: AxiosInstance,
-	options?: UseAxiosOptions,
-): StrictUseAxiosReturn<T, K, R, D> & Promise<StrictUseAxiosReturn<T, K, R, D>>;
 
 /**
  * url必填的axios请求配置
@@ -313,7 +257,6 @@ function createDefaultUseAxiosOptions<T = any>(): UseAxiosOptionsImmediate<T> {
  * 如果外部没有传递 immediate 属性，那么就使用默认的值
  */
 function setDefaultUseAxiosOptions(options: UseAxiosOptions) {
-	// merge<UseAxiosOptions, UseAxiosOptions>(options, createDefaultUseAxiosOptions());
 	const _options = createDefaultUseAxiosOptions();
 	options.immediate = options?.immediate ?? _options.immediate;
 }
