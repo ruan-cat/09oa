@@ -59,7 +59,7 @@ export declare function useAxios<
 ): StrictUseAxiosReturn<T, K, R, D> & Promise<StrictUseAxiosReturn<T, K, R, D>>;
 
 /** 包装器的参数 */
-interface UseAxiosWrapperParams<
+export interface UseAxiosWrapperParams<
 	/**
 	 * 业务数据类型
 	 * @description
@@ -79,7 +79,7 @@ interface UseAxiosWrapperParams<
 	/**
 	 * UseAxiosOptions 的派生类型
 	 */
-	UseAxiosOptionsLike extends UseAxiosOptions<T> = UseAxiosOptions<T>,
+	UseAxiosOptionsLike extends UseAxiosOptions = UseAxiosOptions,
 	/**
 	 * AxiosRequestConfig 用的类型
 	 * @description

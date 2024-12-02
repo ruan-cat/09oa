@@ -28,7 +28,9 @@ import { userStore } from "stores/user";
 import type { Router } from "vue-router";
 
 import type { JsonVO } from "types/JsonVO";
-import type { KeyAxiosRequestConfig, StrictUseAxiosReturn, CreateAxiosRequestConfig } from "utils/useAxios";
+import type { KeyAxiosRequestConfig, CreateAxiosRequestConfig, UseAxiosWrapperParams } from "utils/useAxios";
+import { useAxiosWrapper } from "utils/useAxios";
+import { extendComponentModel } from "echarts/core";
 
 /**
  * 数据上传数据类型
@@ -240,6 +242,19 @@ export interface RequestForUseAxiosParameter<
 
 	/** useAxios 的选项配置 */
 	options?: UseAxiosOptionsJsonVO<T>;
+}
+
+export interface UseAxiosOAParams extends UseAxiosWrapperParams {}
+
+function useAxiosOA<T = any, K extends KeyAxiosRequestConfig = "url">(
+	params: UseAxiosWrapperParams<T, "url", UseAxiosOptionsJsonVO<T>>,
+) {
+	const { config, options } = params;
+	return useAxiosWrapper<JsonVO<T>, RemoveUrl<K>>({
+		config,
+		instance: axiosInstance,
+		options,
+	});
 }
 
 /** 生成默认的选项配置 */
