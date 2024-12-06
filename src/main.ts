@@ -29,7 +29,7 @@ import installHttp from "./plugins/http";
 installHttp(router);
 
 // 安装 vueuse 版本的接口请求工具
-import { installAxiosWithVueUse } from "tools/request-with-useAxios";
+import { installAxiosWithVueUse } from "tools/request-with-useAxios.ts";
 installAxiosWithVueUse(router);
 
 // 安装ElIcon

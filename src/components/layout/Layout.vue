@@ -89,7 +89,7 @@
 	</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { layoutImages } from "@/assets/layout/layoutImages";
 import { watch, nextTick, ref, onMounted, computed, unref } from "vue";
 import { useTabsStore } from "@/stores/layout"; // 引入Pinia store
