@@ -61,3 +61,4 @@ vite.config.ts.*.mjs
 !.env.development
 !.env.production
 !.env
+.vercel

@@ -17,7 +17,6 @@ import { visualizer } from "rollup-plugin-visualizer";
 import VueRouter from "unplugin-vue-router/vite";
 import { VueRouterAutoImports } from "unplugin-vue-router";
 import { createPlugin, getName } from "vite-plugin-autogeneration-import-file";
-import tsconfigPaths from "vite-tsconfig-paths";
 import tsAlias from "vite-plugin-ts-alias";
 
 import { getRouteName } from "./src/plugins/unplugin-vue-router";
@@ -310,12 +309,6 @@ export default defineConfig(({ mode }) => {
 				},
 			}),
 
-			// tsconfigPaths({
-			// 	root: "./",
-			// 	projects: [resolve(__dirname, "tsconfig.app.json")],
-			// 	loose: true,
-			// }),
-
 			tsAlias({
 				/**
 				 * tsconfig name, optional.
@@ -324,20 +317,5 @@ export default defineConfig(({ mode }) => {
 				tsConfigName: "tsconfig.app.json",
 			}),
 		],
-
-		// resolve: {
-		// 	alias: {
-		// 		"@": fileURLToPath(new URL("./src", import.meta.url)),
-		// 		components: fileURLToPath(new URL("./src/components", import.meta.url)),
-		// 		types: fileURLToPath(new URL("./src/types", import.meta.url)),
-		// 		views: fileURLToPath(new URL("./src/views", import.meta.url)),
-		// 		api: fileURLToPath(new URL("./src/apis", import.meta.url)),
-		// 		stores: fileURLToPath(new URL("./src/stores", import.meta.url)),
-		// 		router: fileURLToPath(new URL("./src/router", import.meta.url)),
-		// 		utils: fileURLToPath(new URL("./src/utils", import.meta.url)),
-		// 		tools: fileURLToPath(new URL("./src/tools", import.meta.url)),
-		// 		models: fileURLToPath(new URL("./src/models", import.meta.url)),
-		// 	},
-		// },
 	};
 });
