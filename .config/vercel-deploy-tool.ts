@@ -1,4 +1,5 @@
 import { type Config } from "@ruan-cat/vercel-deploy-tool/src/config.ts";
+import { domains } from "@ruan-cat/domains";
 
 // 这里使用的是阮喵喵的vercel账号
 export default <Config>{
@@ -26,7 +27,7 @@ export default <Config>{
 			type: "userCommands",
 			targetCWD: "./",
 			outputDirectory: "dist",
-			url: ["01s-09oa.ruancat6312.top"],
+			url: domains["09oa"] as unknown as string[],
 			userCommands: ["pnpm -C=./ build"],
 		},
 	],
