@@ -10,11 +10,11 @@
  */
 
 /* prettier-ignore */
-// declare module "vue" {
-// 	export interface GlobalComponents {
-// 		//code
-// 	}
-// }
+declare module "vue" {
+	export interface GlobalComponents {
+		//code
+	}
+}
 
 /* prettier-ignore */
 declare global {
