@@ -18,8 +18,12 @@ import { VueRouterAutoImports } from "unplugin-vue-router";
 import { createPlugin } from "vite-plugin-autogeneration-import-file";
 import tsAlias from "vite-plugin-ts-alias";
 
-import { getRouteName } from "@ruan-cat/utils";
-import { createDirOptionNameFunction, pathResolve, defaultAutoImportTemplate } from "@ruan-cat/utils/node-esm";
+import { getRouteName } from "@ruan-cat/utils/unplugin-vue-router";
+import {
+	createDirOptionNameFunction,
+	pathResolve,
+	defaultAutoImportTemplate,
+} from "@ruan-cat/utils/vite-plugin-autogeneration-import-file";
 
 /**
  * 用全量导入的方式 获取类型

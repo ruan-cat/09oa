@@ -30,13 +30,13 @@ import type { Router } from "vue-router";
 
 import type { JsonVO } from "types/JsonVO";
 
-import { useAxiosWrapper } from "@ruan-cat/utils";
+import { useAxiosWrapper } from "@ruan-cat/utils/vueuse";
 import type {
 	KeyAxiosRequestConfig,
 	CreateAxiosRequestConfig,
 	UseAxiosWrapperParams,
 	KeyHelper,
-} from "@ruan-cat/utils";
+} from "@ruan-cat/utils/vueuse";
 
 /**
  * 数据上传数据类型
