@@ -19,7 +19,7 @@ import { VueRouterAutoImports } from "unplugin-vue-router";
 import { createPlugin, getName } from "vite-plugin-autogeneration-import-file";
 import tsAlias from "vite-plugin-ts-alias";
 
-import { getRouteName } from "./src/plugins/unplugin-vue-router";
+import { getRouteName } from "@ruan-cat/utils/dist/index.js";
 
 /**
  * 用全量导入的方式 获取类型
