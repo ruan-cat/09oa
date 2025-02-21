@@ -197,7 +197,7 @@ export default defineConfig(({ mode }) => {
 				// components 目录
 				{
 					// 文件命名规则
-					name: createDirOptionNameFunction("ComponentIn"),
+					name: createDirOptionNameFunction("Components"),
 					// 匹配规则 匹配全部的vue组件
 					pattern: ["**/*.vue"],
 					// 监听的文件夹
@@ -208,11 +208,6 @@ export default defineConfig(({ mode }) => {
 					// 文件生成模板
 					template: autoImportTemplate,
 					codeTemplates: [
-						// 警告 不生成示例对象 尝试避免出现typescript性能问题
-						// {
-						// 	key: "//typeCode",
-						// 	template: 'type ComponentIn{{name}}Instance = InstanceType<typeof import("{{path}}")["default"]>;\n  ',
-						// },
 						{
 							key: "//code",
 							template: '{{name}}: typeof import("{{path}}")["default"];\n    ',
@@ -228,11 +223,6 @@ export default defineConfig(({ mode }) => {
 					toFile: pathResolve("./types/components-in-views-path.d.ts"),
 					template: autoImportTemplate,
 					codeTemplates: [
-						// 警告 不生成示例对象 尝试避免出现typescript性能问题
-						// {
-						// 	key: "//typeCode",
-						// 	template: 'type Page{{name}}Instance = InstanceType<typeof import("{{path}}")["default"]>;\n  ',
-						// },
 						{
 							key: "//code",
 							template: '{{name}}: typeof import("{{path}}")["default"];\n    ',
