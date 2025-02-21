@@ -29,8 +29,14 @@ import { userStore } from "stores/user";
 import type { Router } from "vue-router";
 
 import type { JsonVO } from "types/JsonVO";
-import type { KeyAxiosRequestConfig, CreateAxiosRequestConfig, UseAxiosWrapperParams, KeyHelper } from "utils/useAxios";
-import { useAxiosWrapper } from "utils/useAxios";
+
+import { useAxiosWrapper } from "@ruan-cat/utils";
+import type {
+	KeyAxiosRequestConfig,
+	CreateAxiosRequestConfig,
+	UseAxiosWrapperParams,
+	KeyHelper,
+} from "@ruan-cat/utils";
 
 /**
  * 数据上传数据类型
@@ -301,7 +307,7 @@ export function getUseAxios<T = any, K extends KeyAxiosRequestConfig = UrlParams
 	} = p;
 	setDefaultUseAxiosOptions(options);
 	config.method = "get";
-	return useAxios<JsonVO<T>, RemoveUrl<K>>(url, config, instance, options);
+	return useAxiosOA<JsonVO<T>, RemoveUrl<K>>(url, config, instance, options);
 }
 
 /**

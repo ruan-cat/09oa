@@ -120,7 +120,12 @@
 		"graphql",
 		"astro"
 	],
-	"cSpell.words": ["bbsname", "xactual", "xbuilding", "xdescription"],
+	"cSpell.words": [
+		"bbsname",
+		"xactual",
+		"xbuilding",
+		"xdescription"
+	],
 	/** 为全局类型导入的智能跳转提供配置 */
 	"editor.gotoLocation.multipleDefinitions": "goto"
 }
