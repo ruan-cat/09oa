@@ -2,7 +2,6 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath, URL } from "node:url";
 import * as fs from "node:fs";
 
-import { upperFirst } from "lodash-es";
 import { type ConfigEnv, defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
@@ -16,10 +15,11 @@ import vueDevTools from "vite-plugin-vue-devtools";
 import { visualizer } from "rollup-plugin-visualizer";
 import VueRouter from "unplugin-vue-router/vite";
 import { VueRouterAutoImports } from "unplugin-vue-router";
-import { createPlugin, getName } from "vite-plugin-autogeneration-import-file";
+import { createPlugin } from "vite-plugin-autogeneration-import-file";
 import tsAlias from "vite-plugin-ts-alias";
 
 import { getRouteName } from "@ruan-cat/utils/dist/index.js";
+import { createDirOptionNameFunction, pathResolve, defaultAutoImportTemplate } from "@ruan-cat/utils/node";
 
 /**
  * 用全量导入的方式 获取类型
@@ -31,49 +31,6 @@ import { getRouteName } from "@ruan-cat/utils/dist/index.js";
 import "./types/env.shim.d.ts";
 
 const { autoImport, resolver } = createPlugin();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-function pathResolve(dir: string) {
-	const resPath = resolve(__dirname, ".", dir);
-	return resPath;
-}
-
-type DirOptions = Parameters<typeof autoImport>["0"];
-type DirOption = DirOptions[number];
-type _DirOptionName = DirOption["name"];
-
-type _DirOptionNameNotString = Exclude<_DirOptionName, string>;
-type DirOptionName = NonNullable<_DirOptionNameNotString>;
-
-/**
- * 创建名称生成函数
- * @description
- * 用于诸如特定的名称前缀 便于实现模块注册
- */
-function createDirOptionNameFunction(prefix: string = "") {
-	/**
-	 * 组件名命名规则支持字符串模板和函数
-	 * @description
-	 * 设置首字母为大写
-	 */
-	const dirOptionName: DirOptionName = function name(fileName) {
-		const resFileName = getName(fileName);
-		const resFileNameWithPrefix = <const>`${upperFirst(prefix)}${upperFirst(resFileName)}`;
-		return resFileNameWithPrefix;
-	};
-
-	return dirOptionName;
-}
-
-const autoImportTemplatePath = <const>"./template/components.template.d.ts";
-
-/** 文件生成模板 */
-function createAutoImportTemplate() {
-	return fs.readFileSync(pathResolve(autoImportTemplatePath), "utf-8");
-}
-
-const autoImportTemplate = createAutoImportTemplate();
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -206,7 +163,7 @@ export default defineConfig(({ mode }) => {
 					// FIXME: 当不包含文件路径时，就出现错误 如果没有预先准备好文件夹，就会生成失败。
 					toFile: pathResolve("./types/components-in-components-path.d.ts"),
 					// 文件生成模板
-					template: autoImportTemplate,
+					template: defaultAutoImportTemplate,
 					codeTemplates: [
 						{
 							key: "//code",
@@ -221,7 +178,7 @@ export default defineConfig(({ mode }) => {
 					pattern: ["**/*.vue"],
 					dir: pathResolve("./src/views"),
 					toFile: pathResolve("./types/components-in-views-path.d.ts"),
-					template: autoImportTemplate,
+					template: defaultAutoImportTemplate,
 					codeTemplates: [
 						{
 							key: "//code",
