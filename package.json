@@ -27,7 +27,7 @@
 		"up-ruan-cat": "pnpm up @ruan-cat/*@latest",
 		"lint:eslint": "eslint . --fix",
 		"format": "prettier --write .",
-		"type-check": "vue-tsc",
+		"type-check": "vue-tsc --build",
 		"deploy-vercel": "node --import=tsx ./scripts/vercel-deploy-tool.ts --env-path=.env.production",
 		"rm:node_modules": "rimraf node_modules pnpm-lock.yaml",
 		"rm:types": "node --import=tsx ./scripts/del-types.ts",
