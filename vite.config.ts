@@ -143,11 +143,11 @@ export default defineConfig(({ mode }) => {
 			 * @description
 			 * 暂不提供
 			 */
-			// visualizer({
-			// 	filename: "./dist/visualizer/index.html",
-			// 	title: "visualizer打包分析报告",
-			// 	template: "network",
-			// }),
+			visualizer({
+				filename: "./dist/visualizer/index.html",
+				title: "visualizer打包分析报告",
+				template: "treemap",
+			}),
 
 			vue(),
 

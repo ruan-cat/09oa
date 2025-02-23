@@ -16,10 +16,10 @@
 		}
 	},
 	"scripts": {
-		"dev": "vite --configLoader runner",
-		"build": "vite build --mode production --configLoader runner",
+		"dev": "vite --configLoader=runner",
+		"build": "vite build --mode production --configLoader=runner",
 		"preview": "vite preview",
-		"test:unit": "vitest",
+		"test": "vitest --ui --watch --api.port=3000",
 		"notuse-preinstall": "npx only-allow pnpm && npm run corepack:pnpm",
 		"corepack:pnpm": "corepack enable && corepack install",
 		"commit": "git-cz",

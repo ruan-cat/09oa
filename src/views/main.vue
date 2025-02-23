@@ -11,7 +11,7 @@
 			这里是嵌套路由的入口 嵌套路由的main路径从这里开始渲染
 			所需的 RouterView 组件是由 layout 布局组件提供的
 		-->
-		<ComponentInLayoutLayout></ComponentInLayoutLayout>
+		<ComponentsLayoutLayout></ComponentsLayoutLayout>
 	</section>
 </template>
 

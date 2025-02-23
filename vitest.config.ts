@@ -13,5 +13,13 @@ const testConfig = defineConfig({
 
 // 导出合并后的配置
 export default defineConfig(({ mode }) => {
-	return mergeConfig(testConfig, viteConfig({ mode }));
+	/**
+	 * 暂不考虑从vite内获取配置 目前vite允许导入ts文件，而vitest却不允许
+	 * @see https://cn.vitejs.dev/config/#configuring-vite
+	 * 故目前vitest不导入vite配置。
+	 */
+
+	// @ts-ignore
+	// return mergeConfig(testConfig, viteConfig({ mode }));
+	return testConfig;
 });
