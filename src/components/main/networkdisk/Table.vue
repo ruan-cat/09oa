@@ -67,7 +67,7 @@
 </template>
 
 <script setup>
-import { MapContentType_UpType } from "@/tools/request-with-useAxios";
+import { MapContentTypeUpType } from "@/tools/request-with-useAxios";
 import { DataScreen } from "@icon-park/vue-next";
 import { columns } from "element-plus/es/components/table-v2/src/common.mjs";
 import { type } from "os";

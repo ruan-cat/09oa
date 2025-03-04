@@ -41,7 +41,9 @@ import type {
 /**
  * 数据上传数据类型
  * @description
- * 待优化 未来可以直接复用axios内提供的值 不需要额外地封装工具
+ * 一个标记工具，用来控制上传数据的格式
+ *
+ * 目前没有发现axios有类似的上传类型声明
  */
 export enum UpType {
 	/** 表单类型 */
@@ -90,14 +92,14 @@ export enum HttpCode {
  * @description
  * 待优化 未来可以直接复用axios内提供的值 不需要额外地封装工具
  */
-export enum MapContentType_UpType {
+export enum MapContentTypeUpType {
 	"application/json;charset=UTF-8" = UpType.json,
 	"multipart/form-data" = UpType.file,
 	"application/octet-stream" = UpType.stream,
 	"application/x-www-form-urlencoded;charset=UTF-8" = UpType.form,
 }
 
-type ContentType = keyof typeof MapContentType_UpType;
+type ContentType = keyof typeof MapContentTypeUpType;
 
 /**
  * 创建axios实例
@@ -123,7 +125,6 @@ export function createAxiosInstance() {
 
 	// 使用qs序列化参数params参数
 	instance.defaults.paramsSerializer = function (params) {
-		// 有疑惑 formdata 格式和这个有什么关系？
 		return qs.stringify(params);
 	};
 
@@ -143,7 +144,7 @@ export const axiosInstance = createAxiosInstance();
  * 不同的数据上传数据类型 要使用不同的接口请求方式
  */
 export function handleHeadersByUpType(config: AxiosRequestConfig, upType: UpType) {
-	const contentType = <ContentType>MapContentType_UpType[upType];
+	const contentType = MapContentTypeUpType[upType] as ContentType;
 
 	if (contentType) {
 		config = merge<AxiosRequestConfig, AxiosRequestConfig>(config, {
@@ -282,7 +283,13 @@ export interface UseAxiosOAParams<T = any, K extends KeyAxiosRequestConfig<D> = 
  * 在本OA项目中，预期作为万能的请求函数
  */
 function useAxiosOA<T = any, K extends KeyAxiosRequestConfig = "url", D = any>(params: UseAxiosOAParams<T, "url", D>) {
-	const { config, options = createDefaultUseAxiosOptions(), instance = axiosInstance } = params;
+	const {
+		config,
+		options = {
+			immediate: false,
+		},
+		instance = axiosInstance,
+	} = params;
 
 	setDefaultUseAxiosOptions(options);
 
