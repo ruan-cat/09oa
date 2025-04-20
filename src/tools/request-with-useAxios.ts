@@ -110,10 +110,14 @@ export function createAxiosInstance() {
 		// https:// xxxxXXXXX
 		// baseURL: import.meta.env.VITE_base_url,
 
-		// 请求的基础路径为特定的字符串 该字符串会被vite反向代理
-		// 在开发环境下 完成vite的反向代理
-		// 在生产环境下 完成nginx的反向代理
-		// /dev-api
+		/**
+		 * 请求的基础路径为特定的字符串 该字符串会被vite反向代理
+		 * 在开发环境下 完成vite的反向代理
+		 * 在生产环境下 完成nginx的反向代理
+		 *
+		 * 这里也可以直接填写特定的地址 不经过任何反向代理 直接请求目标地址
+		 * baseURL: import.meta.env.VITE_base_url,
+		 */
 		baseURL: import.meta.env.VITE_proxy_prefix,
 
 		/** 请求超时时间 */

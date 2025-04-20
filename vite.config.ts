@@ -59,6 +59,7 @@ export default defineConfig(({ mode }) => {
 	const VITE_proxy_prefix = env.VITE_proxy_prefix;
 	const VITE_base_url = env.VITE_base_url;
 	const VITE_app_port = env.VITE_app_port;
+	// TODO: VITE_API_URL 在本项目疑似冗余
 	const VITE_API_URL = env.VITE_API_URL;
 
 	return {
@@ -66,8 +67,6 @@ export default defineConfig(({ mode }) => {
 			open: true,
 			host: "0.0.0.0",
 			port: Number(VITE_app_port),
-			// FIXME: 该配置导致了类型不兼容 需要研究是不是vite版本导致类型声明对不上
-			// https: false,
 			proxy: {
 				[VITE_proxy_prefix]: {
 					changeOrigin: true,
@@ -75,11 +74,12 @@ export default defineConfig(({ mode }) => {
 					rewrite: (path) => path.replace(new RegExp("^" + VITE_proxy_prefix), ""),
 				},
 
-				[VITE_API_URL]: {
-					changeOrigin: true,
-					target: VITE_base_url,
-					rewrite: (path) => path.replace(new RegExp("^" + VITE_proxy_prefix), ""),
-				},
+				// TODO: VITE_API_URL 在本项目疑似冗余
+				// [VITE_API_URL]: {
+				// 	changeOrigin: true,
+				// 	target: VITE_base_url,
+				// 	rewrite: (path) => path.replace(new RegExp("^" + VITE_proxy_prefix), ""),
+				// },
 			},
 		},
 
