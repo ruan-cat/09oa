@@ -1,7 +1,3 @@
-import type { UseAxiosOptionsJsonVO } from "tools/request-with-useAxios";
-
-import type { PageDTO } from "types/index";
-
 import type { ColumnFormDTO } from "types/contentset/ColumnFormDTO";
 import type { ColumnFormVO } from "types/contentset/ColumnFormVO";
 

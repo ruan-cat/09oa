@@ -198,23 +198,58 @@ export default defineConfig(({ mode }) => {
 					"@vueuse/core",
 					"vue",
 					"pinia",
+					{ "@vueuse/integrations/useAxios": ["useAxios"] },
+					{ "@ruan-cat/utils": ["isConditionsEvery", "isConditionsSome"] },
+					{ from: "@ruan-cat/utils", imports: ["Prettify", "ToNumberLike"], type: true },
+					{ "lodash-es": ["isUndefined", "isEmpty", "cloneDeep", "merge", "uniqueId"] },
+
+					// 导入二次封装时使用的vueuse类型
 					{
-						"@vueuse/integrations/useAxios": ["useAxios"],
-					},
-					{
-						"@ruan-cat/utils": ["isConditionsEvery", "isConditionsSome"],
-					},
-					{
-						from: "@ruan-cat/utils",
-						imports: ["Prettify", "ToNumberLike"],
+						from: "@ruan-cat/utils/vueuse",
+						imports: [
+							"KeyHelper",
+							"UseAxiosOptions",
+							"UseAxiosWrapperParams",
+							"KeyAxiosRequestConfig",
+							"RemoveUrlMethod",
+							"CreateAxiosRequestConfig",
+						],
 						type: true,
 					},
+
+					// useAxios-for-01s 类型
 					{
-						"lodash-es": ["isUndefined", "isEmpty", "cloneDeep", "merge", "uniqueId"],
+						type: true,
+						from: "@ruan-cat/utils/vueuse/useAxios-for-01s/index.ts",
+						imports: [
+							"ParamsPathKey",
+							"ParamsQueryKey",
+							"ParamsBodyKey",
+							"HttpParamWay",
+							"AxiosRequestConfigBaseKey",
+							"UseAxiosOptionsJsonVO",
+							"UseAxiosOptionsImmediate",
+							"JsonVO",
+							"PageDTO",
+						],
+					},
+
+					// useAxios-for-01s 函数与变量
+					{
+						"@ruan-cat/utils/vueuse/useAxios-for-01s/index.ts": [
+							"UpType",
+							"HttpCode",
+							"MapContentTypeUpType",
+							"useRequestIn01s",
+						],
 					},
 				],
 				ignore: ["vue-router"],
-				dirs: ["src/**/*"],
+				dirs: [
+					"src/**/*",
+					// 组合式api
+					{ glob: "src/composables/**/*", types: true },
+				],
 				dts: "./types/auto-imports.d.ts",
 				resolvers: [ElementPlusResolver()],
 			}),

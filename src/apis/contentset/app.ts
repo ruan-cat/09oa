@@ -3,11 +3,6 @@
  * @description
  * 本文件不使用预设的接口请求工具
  */
-
-import type { UseAxiosOptionsJsonVO } from "tools/request-with-useAxios";
-
-import type { PageDTO } from "types/index";
-
 import type { AppAddColumn } from "types/contentset/AppAddColumn";
 import type { AppQueryConditionVo } from "types/contentset/AppQueryConditionVo";
 import type { AppQueryOneColumnDto } from "types/contentset/AppQueryOneColumnDto";
