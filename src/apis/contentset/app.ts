@@ -125,3 +125,60 @@ export function updateColumnInfo<T = string>(options: UseAxiosOptionsJsonVO<T>) 
 		},
 	});
 }
+
+/**
+ * 根据条件查询栏目接口参数
+ */
+export interface QueryColumnParams {
+	/** 查询页码 */
+	pageIndex?: number;
+	/** 查询条数 */
+	pageSize?: number;
+	/** 栏目别名 */
+	xappAlias?: string;
+	/** 栏目名称 */
+	xappName?: string;
+	/** 栏目类型 */
+	xappType?: string;
+	/** 栏目描述 */
+	xdescription?: string;
+}
+
+/**
+ * 栏目对象
+ */
+export interface ColumnObject {
+	/** 栏目别名 */
+	xappAlias?: string;
+	/** 栏目图片二进制资源 */
+	xappIcon?: string;
+	/** 栏目名称 */
+	xappName?: string;
+	/** 栏目类型 */
+	xappType?: string;
+	/** 栏目描述 */
+	xdescription?: string;
+	/** 编辑表单类型名称 */
+	xeditName?: string;
+	/** 栏目唯一编号 */
+	xid?: string;
+	/** 阅读表单类型名称 */
+	xpublishName?: string;
+}
+
+/**
+ * 根据条件查询栏目接口
+ * @description
+ * 支持分页查询栏目列表，可按别名、名称、类型、描述等条件筛选
+ */
+export function queryColumnByCondition<T = PageDTO<ColumnObject>>(options: UseAxiosOptionsJsonVO<T>) {
+	return useRequest<ParamsQueryKey, T, QueryColumnParams>({
+		url: "/app/query-condition",
+		options,
+		httpParamWay: "query",
+		config: {
+			method: "GET",
+			data: {},
+		},
+	});
+}

@@ -1,15 +1,5 @@
 ```ts
 /**
- * 更新栏目基础信息
- * @see https://app.apifox.com/link/project/5341789/apis/api-226645942
- */
-export function updateAppinfoApi<T = AppAddColumn>(data: T) {
-	return putUseAxios<T>({
-		config: { url: "/app/update-appinfo", data },
-	});
-}
-
-/**
  * 根据条件查询栏目
  * @see https://app.apifox.com/link/project/5341789/apis/api-226645939
  */

@@ -1,5 +1,5 @@
 import { it, describe, expect } from "vitest";
-import { addColumn, updateColumnInfo } from "./app";
+import { addColumn, updateColumnInfo, queryColumnByCondition } from "./app";
 
 describe("栏目管理接口测试", () => {
 	it("新建栏目接口 - addColumn", async () => {
@@ -120,5 +120,73 @@ describe("栏目管理接口测试", () => {
 		});
 
 		console.log("简单更新栏目响应:", data.value);
+	});
+
+	it("根据条件查询栏目接口 - queryColumnByCondition", async () => {
+		const { execute, data } = queryColumnByCondition({
+			onSuccess(data) {
+				console.log("查询栏目成功", data);
+				expect(data).toBeDefined();
+			},
+			onError(error) {
+				console.error("查询栏目失败", error);
+			},
+			onFinish() {
+				console.log("查询栏目请求完成");
+			},
+		});
+
+		// 执行接口请求 - 完整参数查询
+		await execute({
+			data: {
+				pageIndex: 1,
+				pageSize: 10,
+				xappAlias: "test-alias",
+				xappName: "测试栏目",
+				xappType: "新闻",
+				xdescription: "测试栏目描述",
+			},
+		});
+
+		console.log("查询栏目响应数据:", data.value);
+	});
+
+	it("根据条件查询栏目接口 - 仅分页参数", async () => {
+		const { execute, data } = queryColumnByCondition({
+			onSuccess(data) {
+				console.log("分页查询栏目成功", data);
+			},
+		});
+
+		// 只传递分页参数
+		await execute({
+			data: {
+				pageIndex: 1,
+				pageSize: 20,
+			},
+		});
+
+		console.log("分页查询栏目响应:", data.value);
+	});
+
+	it("根据条件查询栏目接口 - 按栏目名称查询", async () => {
+		const { execute, data } = queryColumnByCondition({
+			onSuccess(data) {
+				console.log("按名称查询栏目成功", data);
+			},
+		});
+
+		console.log("data", data.value?.data);
+
+		// 按栏目名称查询
+		await execute({
+			data: {
+				xappName: "新闻栏目",
+				pageIndex: 1,
+				pageSize: 5,
+			},
+		});
+
+		console.log("按名称查询栏目响应:", data.value);
 	});
 });
