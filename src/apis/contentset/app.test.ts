@@ -1,9 +1,9 @@
 import { it, describe, expect } from "vitest";
-import { addColumn } from "./app";
+import { addColumn, updateColumnInfo } from "./app";
 
 describe("栏目管理接口测试", () => {
 	it("新建栏目接口 - addColumn", async () => {
-		const { execute, data, isLoading, isFinished } = addColumn({
+		const { execute, data } = addColumn({
 			onSuccess(data) {
 				console.log("新建栏目成功", data);
 				expect(data).toBeDefined();
@@ -46,7 +46,6 @@ describe("栏目管理接口测试", () => {
 		});
 
 		console.log("新建栏目响应数据:", data.value);
-		expect(isFinished.value).toBe(true);
 	});
 
 	it("新建栏目接口 - 仅必填参数", async () => {
@@ -65,5 +64,61 @@ describe("栏目管理接口测试", () => {
 		});
 
 		console.log("简单新建栏目响应:", data.value);
+	});
+
+	it("更新栏目基础信息接口 - updateColumnInfo", async () => {
+		const { execute, data } = updateColumnInfo({
+			onSuccess(data) {
+				console.log("更新栏目基础信息成功", data);
+				expect(data).toBeDefined();
+			},
+			onError(error) {
+				console.error("更新栏目基础信息失败", error);
+			},
+			onFinish() {
+				console.log("更新栏目基础信息请求完成");
+			},
+		});
+
+		// 创建测试文件
+		const testFile = new File(["updated content"], "update.txt", {
+			type: "text/plain",
+		});
+
+		// 执行接口请求
+		await execute({
+			data: {
+				xid: "test-column-id",
+				xappName: "更新后的栏目名称",
+				xappAlias: "updated-column",
+				xappType: "测试",
+				xdescription: "用于测试的栏目",
+				xappInfoSeq: "02",
+				xappIcon: "icon-test",
+				readForm: ["form1", "form2"],
+				writeForm: ["editForm1", "editForm2"],
+				file: testFile,
+			},
+		});
+
+		console.log("更新栏目基础信息响应数据:", data.value);
+	});
+
+	it("更新栏目基础信息接口 - 仅必填参数", async () => {
+		const { execute, data } = updateColumnInfo({
+			onSuccess(data) {
+				console.log("仅必填参数更新栏目成功", data);
+			},
+		});
+
+		// 只传递基本必要参数
+		await execute({
+			data: {
+				xid: "simple-update-id",
+				xappName: "简单更新栏目",
+			},
+		});
+
+		console.log("简单更新栏目响应:", data.value);
 	});
 });

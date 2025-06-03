@@ -1,21 +1,5 @@
 ```ts
 /**
- * 新建栏目
- * @description
- * 传参传递data
- *
- * @see https://app.apifox.com/link/project/5341789/apis/api-226645937
- */
-export function addColumnApi<T = AppAddColumn>(options?: UseAxiosOptionsJsonVO<T>) {
-	return postUseAxios<T>({
-		config: {
-			url: "/app/add-column",
-		},
-		options,
-	});
-}
-
-/**
  * 更新栏目基础信息
  * @see https://app.apifox.com/link/project/5341789/apis/api-226645942
  */

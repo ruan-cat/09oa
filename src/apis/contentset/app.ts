@@ -74,11 +74,53 @@ export function addColumn<T = string>(options: UseAxiosOptionsJsonVO<T>) {
 		url: "/app/add-column",
 		options,
 		httpParamWay: "body",
+		upType: UpType.file,
 		config: {
 			method: "POST",
-			headers: {
-				"Content-Type": "multipart/form-data",
-			},
+			data: {},
+		},
+	});
+}
+
+/**
+ * 更新栏目基础信息接口参数
+ */
+export interface UpdateColumnParams {
+	/** 阅读表单 */
+	readForm?: string[];
+	/** 编辑表单 */
+	writeForm?: string[];
+	/** 栏目别名 */
+	xappAlias?: string;
+	/** 栏目图标 */
+	xappIcon?: string;
+	/** 栏目排序 */
+	xappInfoSeq?: string;
+	/** 栏目名称 */
+	xappName?: string;
+	/** 栏目类型 */
+	xappType?: string;
+	/** 栏目描述 */
+	xdescription?: string;
+	/** 编号 */
+	xid?: string;
+	/** 文件上传 */
+	file?: File;
+}
+
+/**
+ * 更新栏目基础信息接口
+ * @description
+ * 更新已存在栏目的基础信息，支持文件上传和表单配置
+ */
+export function updateColumnInfo<T = string>(options: UseAxiosOptionsJsonVO<T>) {
+	return useRequest<ParamsBodyKey, T, UpdateColumnParams>({
+		url: "/app/update-appinfo",
+		options,
+		httpParamWay: "body",
+		upType: UpType.file,
+		config: {
+			method: "PUT",
 			data: {},
 		},
 	});
