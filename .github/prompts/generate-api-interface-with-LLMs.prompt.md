@@ -85,3 +85,19 @@ export function sysManagerModifyUserDetail<T = string>(options: UseAxiosOptionsJ
 2. 当接口请求的返回参数含有 PageDTO 时，不要生成该类型。直接使用已经有的全局 PageDTO 类型即可。
 3. 生成的泛型 T，不要包裹多余的 `JsonVO<T>` 泛型。
 4. 当你生成分页接口时，应该主动的使用 PageDTO 泛型来包裹返回值。
+
+### 测试用例的 data 变量，允许出现类型报错
+
+不要去处理测试用例的 data 变量的类型报错。不要主动的添加 unknown 类型和 any 类型。
+
+### 从正确的位置内导入 `useRequest` 接口请求工具
+
+按照以下的优先级导入 useRequest 请求工具：
+
+#### 优先使用全局导入的方式实现导入
+
+一般来说，useRequest 函数是全局导入的，你直接使用即可。允许出现 useRequest 在使用时出现类型报错。
+
+#### 其次使用组合式 api 提供的文件导入
+
+如果你在类似的 `src/composables/use-request` 目录内，找到了 `useRequest` 函数的导入方式，你可以使用该导入方式。
