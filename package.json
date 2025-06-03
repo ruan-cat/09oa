@@ -11,8 +11,8 @@
 	"scripts": {
 		"dev": "vite --configLoader=runner",
 		"build": "vite build --mode production --configLoader=runner",
-		"preview": "vite preview",
 		"test": "vitest --ui --watch --api.port=4000",
+		"preview": "vite preview",
 		"notuse-preinstall": "npx only-allow pnpm && npm run corepack:pnpm",
 		"corepack:pnpm": "corepack enable && corepack install",
 		"commit": "git-cz",

@@ -5,6 +5,7 @@ import type { Column } from "types/contentset/Column";
 import type { ColumnTypeDTO_Required } from "types/contentset/ColumnType";
 
 import { useRequest } from "@/composables/use-request";
+import { UpType } from "@ruan-cat/utils/vueuse/useAxios-for-01s/index.ts";
 
 /**
  * 新建栏目接口参数

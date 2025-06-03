@@ -1,5 +1,7 @@
 import { fileURLToPath } from "node:url";
 import { mergeConfig, defineConfig, configDefaults } from "vitest/config";
+import tsAlias from "vite-plugin-ts-alias";
+
 import viteConfig from "./vite.config";
 
 // 定义测试配置
@@ -9,6 +11,17 @@ const testConfig = defineConfig({
 		exclude: [...configDefaults.exclude, "e2e/**"],
 		root: fileURLToPath(new URL("./", import.meta.url)),
 	},
+
+	plugins: [
+		// 使用tsAlias插件来处理tsconfig路径别名
+		tsAlias({
+			/**
+			 * tsconfig name, optional.
+			 * @default 'tsconfig.json'
+			 */
+			tsConfigName: "tsconfig.app.json",
+		}),
+	],
 });
 
 // 导出合并后的配置

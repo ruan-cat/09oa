@@ -11,9 +11,6 @@ describe("栏目管理接口测试", () => {
 			onError(error) {
 				console.error("新建栏目失败", error);
 			},
-			onFinish() {
-				console.log("新建栏目请求完成");
-			},
 		});
 
 		// 创建测试文件
@@ -75,9 +72,6 @@ describe("栏目管理接口测试", () => {
 			onError(error) {
 				console.error("更新栏目基础信息失败", error);
 			},
-			onFinish() {
-				console.log("更新栏目基础信息请求完成");
-			},
 		});
 
 		// 创建测试文件
@@ -131,9 +125,6 @@ describe("栏目管理接口测试", () => {
 			onError(error) {
 				console.error("查询栏目失败", error);
 			},
-			onFinish() {
-				console.log("查询栏目请求完成");
-			},
 		});
 
 		// 执行接口请求 - 完整参数查询
@@ -165,6 +156,8 @@ describe("栏目管理接口测试", () => {
 				pageSize: 20,
 			},
 		});
+
+		// console.warn(" 检查 data.value?.data ", data.value?.data);
 
 		console.log("分页查询栏目响应:", data.value);
 	});
