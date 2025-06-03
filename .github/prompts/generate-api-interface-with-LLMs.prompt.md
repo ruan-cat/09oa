@@ -49,7 +49,7 @@
 
 如下例子所示：
 
-```plain
+```ts
 /**
  * 编辑用户详情接口
  * @description
@@ -79,16 +79,66 @@ export function sysManagerModifyUserDetail<T = string>(options: UseAxiosOptionsJ
    > `import { describe, it } from "vitest";`
 2. 使用相对路径的方式导入要测试的函数。
 
+### 测试用例的 data 变量，允许出现类型报错
+
+不要去处理测试用例的 data 变量的类型报错。不要主动的添加 unknown 类型和 any 类型。
+
+### 测试用例内解构导出的内容仅有`execute`和`data`
+
+我们的工具确实提供了很多响应式变量。但是我要求你在测试用例内，只解构出 `execute` 和 `data` 变量。
+
+## 根据请求头类型，增加 upType 上传类型字段
+
+我所提供的接口文档内，会包含具体的请求头类型。增加 `upType` 上传类型字段。
+
+你不应该增加请求头字段。相反，你应该用 `upType` 字段来表示该接口的上传类型。
+
+与此同时，你应该用全局导入的 `UpType` 枚举对象，来使用正确的上传类型。
+
+这是错误的，手写请求头的例子：
+
+```ts
+export function addColumn<T = string>(options: UseAxiosOptionsJsonVO<T>) {
+	return useRequest<ParamsBodyKey, T, AddColumnParams>({
+		url: "/app/add-column",
+		options,
+		httpParamWay: "body",
+		config: {
+			method: "POST",
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+			data: {},
+		},
+	});
+}
+```
+
+这是正确的，用 upType 字段来表示上传类型的例子：
+
+```ts
+export function addColumn<T = string>(options: UseAxiosOptionsJsonVO<T>) {
+	return useRequest<ParamsBodyKey, T, AddColumnParams>({
+		url: "/app/add-column",
+		options,
+		httpParamWay: "body",
+		upType: UpType.file,
+		config: {
+			method: "POST",
+			data: {},
+		},
+	});
+}
+```
+
 ## 边缘情况注意事项
+
+你在生成接口时，应该严格遵循的注意事项：
 
 1. 当目标接口的参数请求方式为 query 时，请不要添加多余的 params 参数。
 2. 当接口请求的返回参数含有 PageDTO 时，不要生成该类型。直接使用已经有的全局 PageDTO 类型即可。
 3. 生成的泛型 T，不要包裹多余的 `JsonVO<T>` 泛型。
 4. 当你生成分页接口时，应该主动的使用 PageDTO 泛型来包裹返回值。
-
-### 测试用例的 data 变量，允许出现类型报错
-
-不要去处理测试用例的 data 变量的类型报错。不要主动的添加 unknown 类型和 any 类型。
 
 ### 从正确的位置内导入 `useRequest` 接口请求工具
 
