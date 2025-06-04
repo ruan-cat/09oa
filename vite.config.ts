@@ -56,9 +56,9 @@ export default defineConfig(({ mode }) => {
 
 	// 提供类型声明 便于得到使用提示
 	const env = loadEnv(mode, process.cwd()) as unknown as ImportMetaEnv;
-	const VITE_proxy_prefix = env.VITE_proxy_prefix;
-	const VITE_base_url = env.VITE_base_url;
-	const VITE_app_port = env.VITE_app_port;
+	const VITE_PROXY_PREFIX = env.VITE_PROXY_PREFIX;
+	const VITE_BASE_URL = env.VITE_BASE_URL;
+	const VITE_APP_PORT = env.VITE_APP_PORT;
 	// TODO: VITE_API_URL 在本项目疑似冗余
 	const VITE_API_URL = env.VITE_API_URL;
 
@@ -66,19 +66,19 @@ export default defineConfig(({ mode }) => {
 		server: {
 			open: true,
 			host: "0.0.0.0",
-			port: Number(VITE_app_port),
+			port: Number(VITE_APP_PORT),
 			proxy: {
-				[VITE_proxy_prefix]: {
+				[VITE_PROXY_PREFIX]: {
 					changeOrigin: true,
-					target: VITE_base_url,
-					rewrite: (path) => path.replace(new RegExp("^" + VITE_proxy_prefix), ""),
+					target: VITE_BASE_URL,
+					rewrite: (path) => path.replace(new RegExp("^" + VITE_PROXY_PREFIX), ""),
 				},
 
 				// TODO: VITE_API_URL 在本项目疑似冗余
 				// [VITE_API_URL]: {
 				// 	changeOrigin: true,
-				// 	target: VITE_base_url,
-				// 	rewrite: (path) => path.replace(new RegExp("^" + VITE_proxy_prefix), ""),
+				// 	target: VITE_BASE_URL,
+				// 	rewrite: (path) => path.replace(new RegExp("^" + VITE_PROXY_PREFIX), ""),
 				// },
 			},
 		},
