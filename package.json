@@ -18,6 +18,7 @@
 		"commit": "git-cz",
 		"git:fetch": "git fetch -p",
 		"up-ruan-cat": "pnpm up @ruan-cat/*@latest",
+		"up": "pnpm up '!@wangeditor/' '!@form-create/'",
 		"lint:eslint": "eslint . --fix",
 		"format": "prettier --write .",
 		"type-check": "vue-tsc --build",
