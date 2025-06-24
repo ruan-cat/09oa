@@ -22,7 +22,8 @@
 		"format": "prettier --write .",
 		"type-check": "vue-tsc --build",
 		"deploy-vercel": "node --import=tsx ./scripts/vercel-deploy-tool.ts --env-path=.env.production",
-		"rm:node_modules": "rimraf node_modules pnpm-lock.yaml",
+		"clear:cache": "rimraf -g '**/{dist,.turbo,.vercel,.cache,.temp}'",
+		"clear:deps": "rimraf -g '**/{node_modules,package-lock.json,pnpm-lock.yaml}'",
 		"rm:types": "node --import=tsx ./scripts/del-types.ts",
 		"predev": "npm run rm:types"
 	},
