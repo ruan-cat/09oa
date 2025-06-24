@@ -73,13 +73,6 @@ export default defineConfig(({ mode }) => {
 					target: VITE_BASE_URL,
 					rewrite: (path) => path.replace(new RegExp("^" + VITE_PROXY_PREFIX), ""),
 				},
-
-				// TODO: VITE_API_URL 在本项目疑似冗余
-				// [VITE_API_URL]: {
-				// 	changeOrigin: true,
-				// 	target: VITE_BASE_URL,
-				// 	rewrite: (path) => path.replace(new RegExp("^" + VITE_PROXY_PREFIX), ""),
-				// },
 			},
 		},
 
@@ -128,11 +121,6 @@ export default defineConfig(({ mode }) => {
 						 * src: "src/pages",
 						 */
 						src: "src/views",
-						// 下面的配置暂时不使用
-						// override globals
-						// exclude: (excluded) => excluded,
-						// filePatterns: (filePatterns) => filePatterns,
-						// extensions: (extensions) => extensions,
 					},
 				],
 				getRouteName,
@@ -165,7 +153,7 @@ export default defineConfig(({ mode }) => {
 					dir: pathResolve("./src/components"),
 					// 生成的文件
 					// FIXME: 当不包含文件路径时，就出现错误 如果没有预先准备好文件夹，就会生成失败。
-					toFile: pathResolve("./types/components-in-components-path.d.ts"),
+					toFile: "./types/components-in-components-path.d.ts",
 					// 文件生成模板
 					template: defaultAutoImportTemplate,
 					codeTemplates: [
