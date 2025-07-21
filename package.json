@@ -4,7 +4,7 @@
 	"private": true,
 	"type": "module",
 	"description": "01星球大项目-09OA项目。这里是OA系统后台前端代码。",
-	"packageManager": "pnpm@9.15.9",
+	"packageManager": "pnpm@10.13.1",
 	"engines": {
 		"node": ">=22.14.0"
 	},
@@ -26,6 +26,15 @@
 		"rm:types": "tsx ./scripts/del-types.ts",
 		"git:fetch": "git fetch -p",
 		"predev": "npm run rm:types"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"core-js",
+			"core-js-pure",
+			"es5-ext",
+			"esbuild",
+			"vue-demi"
+		]
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^2.3.1",
