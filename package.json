@@ -4,7 +4,7 @@
 	"private": true,
 	"type": "module",
 	"description": "01星球大项目-09OA项目。这里是OA系统后台前端代码。",
-	"packageManager": "pnpm@10.13.1",
+	"packageManager": "pnpm@10.14.0",
 	"engines": {
 		"node": ">=22.14.0"
 	},
@@ -80,6 +80,7 @@
 		"@ruan-cat/taze-config": "^0.2.0",
 		"@ruan-cat/utils": "^4.9.0",
 		"@ruan-cat/vercel-deploy-tool": "^0.9.4",
+		"@ruan-cat/vite-plugin-ts-alias": "^0.1.0",
 		"@ruan-cat/vuepress-preset-config": "^0.1.38",
 		"@types/eslint-config-prettier": "^6.11.3",
 		"@types/lodash-es": "^4.17.12",
@@ -116,7 +117,6 @@
 		"vite": "^7.0.0",
 		"vite-plugin-autogeneration-import-file": "^3.0.0",
 		"vite-plugin-html": "^3.2.2",
-		"vite-plugin-ts-alias": "^0.1.1",
 		"vite-plugin-vue-devtools": "^7.7.7",
 		"vitest": "^3.2.4"
 	}

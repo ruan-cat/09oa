@@ -16,7 +16,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 import VueRouter from "unplugin-vue-router/vite";
 import { VueRouterAutoImports } from "unplugin-vue-router";
 import { createPlugin } from "vite-plugin-autogeneration-import-file";
-import tsAlias from "vite-plugin-ts-alias";
+import tsAlias from "@ruan-cat/vite-plugin-ts-alias";
 
 import { getRouteName } from "@ruan-cat/utils/unplugin-vue-router";
 import {
