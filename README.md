@@ -1,5 +1,7 @@
 # `oa-frontend`
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ruan-cat/09oa)
+
 下面说明能够帮助在基于 Vite 构建工具环境下开发`Vue3`。
 
 ## `IDE`设置要求
