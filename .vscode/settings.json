@@ -127,5 +127,11 @@
 		"xdescription"
 	],
 	/** 为全局类型导入的智能跳转提供配置 */
-	"editor.gotoLocation.multipleDefinitions": "goto"
+	"editor.gotoLocation.multipleDefinitions": "goto",
+	/** 启用文件嵌套折叠功能 */
+	"explorer.fileNesting.enabled": true,
+	/** 折叠 AI大模型记忆文件 */
+	"explorer.fileNesting.patterns": {
+		"CLAUDE.md": "GEMINI.md,AGENTS.md"
+	}
 }
