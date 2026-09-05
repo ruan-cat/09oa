@@ -1,5 +1,8 @@
 {
 	"compilerOptions": {
+    // === 2026-09-05 tsserver memory downgrade (PLAN v2 Task D Batch 3) ===
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/.cache/tsconfig.node.tsbuildinfo",
 		"target": "ES2022",
 		"lib": [
 			"ES2023"
