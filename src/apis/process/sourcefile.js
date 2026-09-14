@@ -1,4 +1,5 @@
 // 资源文件api
+import Request from "../request";
 // 获取附件列表
 export const getSourceFileListApi = async (data, success, fail) => {
 	try {
